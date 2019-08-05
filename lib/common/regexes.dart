@@ -1,5 +1,5 @@
 // ignore_for_file: non_constant_identifier_names
-import 'package:highlight/languages/types.dart';
+import 'package:highlight/common/types.dart';
 
 final C_NUMBER_RE = R.s(
     r'(-?)(\b0[xX][a-fA-F0-9]+|(\b\d+(\.\d*)?|\.\d+)([eE][-+]?\d+)?)'); // 0x..., 0..., decimal, float

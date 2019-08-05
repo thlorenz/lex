@@ -1,6 +1,7 @@
 // ignore_for_file: non_constant_identifier_names
+import 'package:highlight/common/mode.dart';
 import 'package:highlight/common/regexes.dart';
-import 'package:highlight/languages/types.dart';
+import 'package:highlight/common/types.dart';
 
 final NEWLINE = R.x(RegExp(r'\n'));
 

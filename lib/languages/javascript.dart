@@ -1,8 +1,10 @@
 // ignore_for_file: non_constant_identifier_names
 import 'package:flutter/cupertino.dart';
+import 'package:highlight/common/language.dart';
+import 'package:highlight/common/mode.dart';
 import 'package:highlight/common/modes.dart';
 import 'package:highlight/common/regexes.dart';
-import 'package:highlight/languages/types.dart';
+import 'package:highlight/common/types.dart';
 import 'package:meta/meta.dart';
 
 final _OBJECT_ATTR_CONTAINER =
@@ -17,8 +19,8 @@ final _OBJECT_ATTR_CONTAINER =
 final _VC_PARAMS = Mode(
   className: 'params',
   variants: [
-    Range(begin: IDENT_RE),
-    Range(begin: R.x(RegExp(r'\(\s*\)'))),
+    Mode(begin: IDENT_RE),
+    Mode(begin: R.x(RegExp(r'\(\s*\)'))),
     Mode(
       begin: R.x(RegExp(r'\(')),
       end: R.x(RegExp(r'\)')),
@@ -150,9 +152,9 @@ class JavaScript {
   static final NUMBER = Mode(
     className: 'number',
     variants: [
-      Range(begin: R.s(r'\b(0[bB][01]+)')),
-      Range(begin: R.s(r'\b(0[oO][0-7]+)')),
-      Range(begin: C_NUMBER_RE),
+      Mode(begin: R.s(r'\b(0[bB][01]+)')),
+      Mode(begin: R.s(r'\b(0[oO][0-7]+)')),
+      Mode(begin: C_NUMBER_RE),
     ],
     relevance: 0,
   );
