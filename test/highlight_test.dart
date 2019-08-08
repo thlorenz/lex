@@ -1,9 +1,14 @@
-import 'package:flutter_test/flutter_test.dart';
-import 'package:highlight/highlight.dart';
+/*
+import 'package:highlight/lexers/javascript.dart';
+import 'package:test/test.dart';
 
 void main() {
   test('highlights "const s = 1"', () {
-    final hl = Highlighter();
-    print(hl);
+    final lexer = JavaScriptLexer();
+    for (final token in lexer.getTokensUnprocessed('const s = 1')) {
+      print(token.first);
+    }
   });
 }
+
+ */
