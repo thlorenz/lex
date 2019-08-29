@@ -55,13 +55,16 @@ class JavaScriptLexer extends RegexLexer {
     ],
     'slashstartsregex': [
       Parse.include('commentsandwhitespace'),
+      /* TODO: disabled Lone quantifier brackets
+      https://stackoverflow.com/questions/40939209/invalid-regular-expressionlone-quantifier-brackets
       Parse(
           r'/(\\.|[^[/\\\n]|\[(\\.|[^\]\\\n])*])+/'
           r'([gimuy]+\b|\B)',
           Token.StringRegex,
           [POP]),
+       */
       Parse(r'(?=/)', Token.Text, [POP, 'badregex']),
-      Parse.empty(POP)
+      Parse.empty([POP])
     ],
     'badregex': [
       Parse(r'\n', Token.Text, [POP]),
@@ -106,7 +109,9 @@ class JavaScriptLexer extends RegexLexer {
           r'Error|eval|isFinite|isNaN|isSafeInteger|parseFloat|parseInt|'
           r'document|this|window)\b',
           Token.NameBuiltin),
+      // TODO: should be the below if we want to support unicode
       // Parse(JS_IDENT, Token.NameOther),
+      Parse(r'[a-zA-Z\d_$]+', Token.NameOther),
       Parse(r'"(\\\\|\\"|[^"])*"', Token.StringDouble),
       Parse(r"'(\\\\|\\'|[^'])*'", Token.StringSingle),
       Parse(r'`', Token.StringBacktick, ['interp']),

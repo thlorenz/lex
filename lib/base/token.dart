@@ -105,16 +105,25 @@ class Parse {
   const Parse(
     this.pattern,
     this.token, [
-    this.newStates = const <String>[],
+    this.newStates = null,
   ]);
   factory Parse.include(String s) => Parse(s, Token.IncludeOtherParse);
-  factory Parse.empty(String nextState) => Parse('', Token.Text, [nextState]);
+  factory Parse.empty(List<String> nextState) =>
+      Parse('', Token.Text, nextState);
 
   final String pattern;
   final Token token;
   final List<String> newStates;
 
   Parse get parent => null;
+
+  String toString() {
+    return '''Parse {
+      pattern: $pattern
+      token: $token
+      newStates: $newStates
+    }''';
+  }
 
   List<String> split() {
     List<String> buf = [];

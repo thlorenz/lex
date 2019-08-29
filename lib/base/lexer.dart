@@ -1,5 +1,6 @@
 import 'package:highlight/base/token.dart';
 import 'package:highlight/base/types.dart';
+import 'package:highlight/base/unprocessed_token.dart';
 
 abstract class Lexer {
   Lexer({
@@ -41,7 +42,7 @@ abstract class Lexer {
   // In subclasses, implement this method as a generator to
   // maximize effectiveness.
 
-  Iterable<Tuple2<int, Token, String>> getTokensUnprocessed(String text);
+  Iterable<UnprocessedToken> getTokensUnprocessed(String text);
 
   // Return an iterable of (tokentype, value) pairs generated from
   // `text`. If `unfiltered` is set to `True`, the filtering mechanism
@@ -102,7 +103,7 @@ abstract class RegexLexer extends Lexer {
   // The get_tokens_unprocessed() method must return an iterator or iterable
   // containing tuples in the form (index, token, value).
   // Stream<Tuple2<index, token, value>>
-  Iterable<Tuple2<int, Token, String>> getTokensUnprocessed(
+  Iterable<UnprocessedToken> getTokensUnprocessed(
     String text, [
     List<String> stack,
   ]) sync* {
@@ -110,7 +111,7 @@ abstract class RegexLexer extends Lexer {
     Map<String, Iterable<Parse>> parsedefs = _expand(parses);
     final List<String> statestack = stack ?? List.from(['root']);
     List<Parse> statetokens = parsedefs[statestack.last];
-    while (true) {
+    while (true && pos < text.length) {
       bool matched = false;
       for (final parse in statetokens) {
         final pattern = parse.pattern;
@@ -127,19 +128,24 @@ abstract class RegexLexer extends Lexer {
         final m = regex.matchAsPrefix(text, pos);
 
         if (m != null) {
-          if (token != null) {
-            yield Tuple2(pos, token, m.group(0));
+          if (token != null && m.group(0).isNotEmpty) {
+            yield UnprocessedToken(pos, token, m.group(0));
           }
           pos = m.end;
-          for (final state in newStates) {
-            if (state == POP)
-              this._pop(statestack, 1);
-            else if (state == POP2)
-              this._pop(statestack, 2);
-            else if (state == PUSH)
-              statestack.add(statestack.last);
-            else
-              statestack.add(state);
+          if (newStates != null) {
+            for (final state in newStates) {
+              if (state == POP)
+                this._pop(statestack, 1);
+              else if (state == POP2)
+                this._pop(statestack, 2);
+              else if (state == PUSH)
+                statestack.add(statestack.last);
+              else
+                statestack.add(state);
+            }
+            statetokens = statestack.isEmpty
+                ? parsedefs['root']
+                : parsedefs[statestack.last];
           }
           matched = true;
           break;
@@ -153,11 +159,11 @@ abstract class RegexLexer extends Lexer {
           if (text[pos] == '\n') {
             _popTo(statestack, 'root');
             statetokens = parsedefs['root'];
-            yield Tuple2(pos, Token.Text, '\n');
+            yield UnprocessedToken(pos, Token.Text, '\n');
             pos++;
             continue;
           }
-          yield Tuple2(pos, Token.Error, text[pos]);
+          yield UnprocessedToken(pos, Token.Error, text[pos]);
           pos++;
         } on Exception catch (err) {
           break;
