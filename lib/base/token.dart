@@ -124,6 +124,7 @@ class Parse {
   final List<String> newStates;
 
   Parse get parent => null;
+  List<Token> get groupTokens => null;
 
   String toString() {
     return '''Parse {
@@ -148,7 +149,9 @@ class Parse {
 class GroupParse extends Parse {
   GroupParse(
     String pattern,
-    List<Token> token, [
+    this.groupTokens, [
     List<String> newStates = null,
   ]) : super(pattern, Token.ParseByGroups);
+
+  final List<Token> groupTokens;
 }

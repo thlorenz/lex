@@ -151,7 +151,11 @@ abstract class RegexLexer extends Lexer {
 
         if (m != null) {
           if (token != null && m.group(0).isNotEmpty) {
-            yield UnprocessedToken(pos, token, m.group(0));
+            if (token == Token.ParseByGroups) {
+              yield* this._bygroup(m, parse.groupTokens);
+            } else {
+              yield UnprocessedToken(pos, token, m.group(0));
+            }
           }
           pos = m.end;
           if (newStates != null) {
@@ -192,6 +196,19 @@ abstract class RegexLexer extends Lexer {
           break;
         }
       }
+    }
+  }
+
+  // Callback that yields multiple actions for each group in the match.
+  Iterable<UnprocessedToken> _bygroup(Match m, Iterable<Token> tokens) sync* {
+    // TODO: not yet dealing with nested lexer
+    int groupIdx = 1;
+    int pos = m.start;
+    for (final token in tokens) {
+      final s = m.group(groupIdx);
+      yield UnprocessedToken(pos, token, s);
+      pos += s.length;
+      groupIdx++;
     }
   }
 
