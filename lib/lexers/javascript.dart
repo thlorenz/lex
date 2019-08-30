@@ -1,18 +1,9 @@
 // ignore_for_file: non_constant_identifier_names
 import 'package:highlight/base/lexer.dart';
-import 'package:highlight/base/token.dart';
-import 'package:highlight/base/types.dart';
 import 'package:highlight/unistring.dart';
 
 final JS_IDENT_START = (r'(?:[$_' +
-    uni.combine([
-      'Lu',
-      'Ll',
-      'Lt',
-      'Lm',
-      'Lo',
-      'Nl',
-    ]) +
+    uni.combine(['Lu', 'Ll', 'Lt', 'Lm', 'Lo', 'Nl']) +
     ']|\\\\u[a-fA-F0-9]{4})');
 final JS_IDENT_PART = (r'(?:[$' +
     uni.combine([
@@ -30,7 +21,7 @@ final JS_IDENT_PART = (r'(?:[$' +
 final JS_IDENT = JS_IDENT_START + '(?:' + JS_IDENT_PART + ')*';
 
 class JavaScriptLexer extends RegexLexer {
-  final String name = 'JavaScript';
+  final name = 'JavaScript';
   final aliases = ['js', 'javascript'];
   final filenames = ['*.js', '*.jsm'];
   final mimetypes = [
@@ -130,15 +121,4 @@ class JavaScriptLexer extends RegexLexer {
     ],
     // # (\\\\|\\`|[^`])*`', String.Backtick),
   };
-
-  double analyseText(String text) {
-    // TODO: implement analyseText
-    return null;
-  }
-
-  @override
-  List<Parse> getTokens(String text, {bool unfiltered = false}) {
-    // TODO: implement getTokens
-    return null;
-  }
 }

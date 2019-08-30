@@ -2,6 +2,25 @@ import 'package:highlight/base/token.dart';
 import 'package:highlight/base/types.dart';
 import 'package:highlight/base/unprocessed_token.dart';
 
+export 'package:highlight/base/token.dart';
+export 'package:highlight/base/types.dart';
+export 'package:highlight/base/unprocessed_token.dart';
+
+// TODO: this should use the given lexer in order do the following:
+//  Callback that processes the match with a different lexer.
+//
+//  The keyword arguments are forwarded to the lexer, except `state` which
+//  is handled separately.
+//
+//  `state` specifies the state that the new lexer will start in, and can
+//  be an enumerable such as ('root', 'inline', 'string') or a simple
+//  string which is assumed to be on top of the root state.
+//
+// For now we just treat this as text.
+Token using(RegexLexer lexer) {
+  return Token.Text;
+}
+
 abstract class Lexer {
   Lexer({
     this.stripnl = true,
@@ -34,7 +53,10 @@ abstract class Lexer {
   // parameter) and the return value is automatically converted to
   // `float`. If the return value is an object that is boolean `False`
   // it's the same as if the return values was ``0.0``.
-  double analyseText(String text);
+  double analyseText(String text) {
+    throw new UnimplementedError(
+        'Either inheritor or regex lexer needs to implement this');
+  }
 
   // Return an iterable of (index, tokentype, value) pairs where "index"
   // is the starting position of the token within the input text.
@@ -166,6 +188,7 @@ abstract class RegexLexer extends Lexer {
           yield UnprocessedToken(pos, Token.Error, text[pos]);
           pos++;
         } on Exception catch (err) {
+          print(err);
           break;
         }
       }

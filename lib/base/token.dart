@@ -95,6 +95,7 @@ enum Token {
 
 // Special
   IncludeOtherParse,
+  ParseByGroups,
 }
 
 const POP = '#pop';
@@ -108,6 +109,13 @@ class Parse {
     this.newStates = null,
   ]);
   factory Parse.include(String s) => Parse(s, Token.IncludeOtherParse);
+  factory Parse.bygroups(
+    String pattern,
+    List<Token> tokens, [
+    List<String> nextState,
+  ]) =>
+      GroupParse(pattern, tokens, nextState);
+
   factory Parse.empty(List<String> nextState) =>
       Parse('', Token.Text, nextState);
 
@@ -134,4 +142,13 @@ class Parse {
     }
     return buf.reversed;
   }
+}
+
+// Yields multiple actions for each group in the match.
+class GroupParse extends Parse {
+  GroupParse(
+    String pattern,
+    List<Token> token, [
+    List<String> newStates = null,
+  ]) : super(pattern, Token.ParseByGroups);
 }

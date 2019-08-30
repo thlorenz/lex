@@ -1,11 +1,10 @@
-import 'package:highlight/base/token.dart';
-import 'package:highlight/base/unprocessed_token.dart';
+import 'package:highlight/base/lexer.dart';
 import 'package:highlight/lexers/javascript.dart';
 import 'package:test/test.dart';
 
 void main() {
   final lexer = JavaScriptLexer();
-  group('JavaScript', () {
+  group('Lexer: JavaScript', () {
     test('const s = 1', () {
       expect(
         lexer.getTokensUnprocessed('const s = 1'),

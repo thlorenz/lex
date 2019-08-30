@@ -9,6 +9,12 @@ class UnprocessedToken extends Equatable {
   final String match;
 
   String toString() {
-    return 'UnprocessedToken($pos, $token, \'$match\')';
+    return 'UnprocessedToken($pos, $token, \'${_stringifyMatch(match)}\')';
+  }
+
+  String _stringifyMatch(String match) {
+    if (match == '\n') return '\\n';
+    if (match == "'") return "\\'";
+    return match;
   }
 }
