@@ -6,21 +6,6 @@ export 'package:lexer/base/token.dart';
 export 'package:lexer/base/types.dart';
 export 'package:lexer/base/unprocessed_token.dart';
 
-// TODO: this should use the given lexer in order do the following:
-//  Callback that processes the match with a different lexer.
-//
-//  The keyword arguments are forwarded to the lexer, except `state` which
-//  is handled separately.
-//
-//  `state` specifies the state that the new lexer will start in, and can
-//  be an enumerable such as ('root', 'inline', 'string') or a simple
-//  string which is assumed to be on top of the root state.
-//
-// For now we just treat this as text.
-Token using(RegexLexer lexer) {
-  return Token.Text;
-}
-
 abstract class Lexer {
   Lexer({
     this.stripnl = true,
