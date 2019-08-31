@@ -72,8 +72,11 @@ class DartLexer extends RegexLexer {
               Token.StringEscape),
           Parse.bygroups(
               r'(\$)([a-zA-Z_]\w*)', [Token.StringInterpol, Token.Name]),
-          Parse.bygroups(r'(\$\{)(.*?)(\})',
-              [Token.StringInterpol, using(this), Token.StringInterpol])
+          Parse.bygroups(r'(\$\{)(.*?)(\})', [
+            Token.StringInterpol,
+            Token.RecurseSameLexer,
+            Token.StringInterpol,
+          ])
         ],
         'string_double': [
           Parse(r'"', Token.StringDouble, [POP]),

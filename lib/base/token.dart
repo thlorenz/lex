@@ -96,6 +96,7 @@ enum Token {
 // Special
   IncludeOtherParse,
   ParseByGroups,
+  RecurseSameLexer,
 }
 
 const POP = '#pop';
