@@ -1,4 +1,4 @@
-import 'package:highlight/base/lexer.dart';
+import 'package:lexer/base/lexer.dart';
 import 'package:test/test.dart';
 
 abstract class RegexLexerRunner {

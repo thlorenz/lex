@@ -1,7 +1,7 @@
-import 'package:highlight/base/lexer.dart';
-import 'package:highlight/base/token.dart';
-import 'package:highlight/base/types.dart';
-import 'package:highlight/base/unprocessed_token.dart';
+import 'package:lexer/base/lexer.dart';
+import 'package:lexer/base/token.dart';
+import 'package:lexer/base/types.dart';
+import 'package:lexer/base/unprocessed_token.dart';
 import 'package:test/test.dart';
 
 // Tests adapted from: pygments tests/test_regexlexer.py

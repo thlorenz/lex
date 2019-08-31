@@ -1,10 +1,10 @@
-import 'package:highlight/base/token.dart';
-import 'package:highlight/base/types.dart';
-import 'package:highlight/base/unprocessed_token.dart';
+import 'package:lexer/base/token.dart';
+import 'package:lexer/base/types.dart';
+import 'package:lexer/base/unprocessed_token.dart';
 
-export 'package:highlight/base/token.dart';
-export 'package:highlight/base/types.dart';
-export 'package:highlight/base/unprocessed_token.dart';
+export 'package:lexer/base/token.dart';
+export 'package:lexer/base/types.dart';
+export 'package:lexer/base/unprocessed_token.dart';
 
 // TODO: this should use the given lexer in order do the following:
 //  Callback that processes the match with a different lexer.

@@ -1,4 +1,4 @@
-import 'package:highlight/base/lexer.dart';
+import 'package:lexer/base/lexer.dart';
 
 class DartLexer extends RegexLexer {
   final name = 'Dart';
