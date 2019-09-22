@@ -1,6 +1,6 @@
 // ignore_for_file: non_constant_identifier_names
-import 'package:lexer/base/lexer.dart';
-import 'package:lexer/unistring.dart';
+import 'package:lex/base/lexer.dart';
+import 'package:lex/unistring.dart';
 
 final JS_IDENT_START = (r'(?:[$_' +
     uni.combine(['Lu', 'Ll', 'Lt', 'Lm', 'Lo', 'Nl']) +

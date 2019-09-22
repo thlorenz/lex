@@ -1,4 +1,4 @@
-import 'package:lexer/base/lexer.dart';
+import 'package:lex/base/lexer.dart';
 
 // For `CoffeeScript`_ source code. http://coffeescript.org
 class CoffeeScriptLexer extends RegexLexer {

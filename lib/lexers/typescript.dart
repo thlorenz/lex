@@ -1,6 +1,6 @@
 // For `TypeScript http://typescriptlang.org/` source code.
-import 'package:lexer/base/lexer.dart';
-import 'package:lexer/lexers/javascript.dart';
+import 'package:lex/base/lexer.dart';
+import 'package:lex/lexers/javascript.dart';
 
 final _jsLexer = JavaScriptLexer();
 

@@ -1,4 +1,4 @@
-import 'package:lexer/lexers/javascript.dart';
+import 'package:lex/lexers/javascript.dart';
 
 void main() {
   final lexer = JavaScriptLexer();

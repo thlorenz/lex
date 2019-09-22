@@ -1,10 +1,10 @@
-import 'package:lexer/base/token.dart';
-import 'package:lexer/base/types.dart';
-import 'package:lexer/base/unprocessed_token.dart';
+import 'package:lex/base/token.dart';
+import 'package:lex/base/types.dart';
+import 'package:lex/base/unprocessed_token.dart';
 
-export 'package:lexer/base/token.dart';
-export 'package:lexer/base/types.dart';
-export 'package:lexer/base/unprocessed_token.dart';
+export 'package:lex/base/token.dart';
+export 'package:lex/base/types.dart';
+export 'package:lex/base/unprocessed_token.dart';
 
 abstract class Lexer {
   Lexer({

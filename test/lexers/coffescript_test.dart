@@ -1,5 +1,5 @@
-import 'package:lexer/base/lexer.dart';
-import 'package:lexer/lexers/coffeescript.dart';
+import 'package:lex/base/lexer.dart';
+import 'package:lex/lexers/coffeescript.dart';
 import 'package:test/test.dart';
 
 import 'regex_lexer_runner.dart';
